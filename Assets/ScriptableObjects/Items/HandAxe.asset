@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ba5b97ed7ba843bf48edbc5fc5fc4, type: 3}
+  m_Name: HandAxe
+  m_EditorClassIdentifier: 
+  Name: Hand Axe
+  Description: Commonly known as a hatchet, this smaller variety of axe is an everyday
+    work tool.
+  Icon: {fileID: -226204283, guid: 29c99a34693ada447a07198af68225c7, type: 3}
