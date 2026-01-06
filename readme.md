@@ -1,4 +1,5 @@
 '''mermaid
+
 classDiagram
 
     %% Model
@@ -44,4 +45,5 @@ classDiagram
     InventoryView ..> InventoryController : listens
     InventoryView --> SlotView 
 : creates
+
 '''
