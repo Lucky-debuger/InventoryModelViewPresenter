@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlotView : MonoBehaviour, IPointerClickHandler
+public class SlotView : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private ItemModel item;
@@ -16,22 +16,18 @@ public class SlotView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Image itemIcon;
     [SerializeField] private Image descriptionIcon;
-    [SerializeField] private Button button;
+    [SerializeField] private Toggle toggle;
 
     public ItemModel Item => item;
 
-    public int ItemCount {get; private set;} = 1;
-    
+    public int ItemCount { get; private set; } = 1;
+
     public event Action<SlotView> OnSlotClicked;
-    private ColorBlock _defaultColor;
-    private ColorBlock _highlightedColor;
 
-    private void Start()
+
+    private void Awake()
     {
-        _defaultColor = button.colors;
-
-        _highlightedColor = button.colors;
-        _highlightedColor.colorMultiplier = 3f;
+        toggle.onValueChanged.AddListener(OnToggleChanged);
     }
 
     public void SetItem(ItemModel itemModel)
@@ -59,18 +55,13 @@ public class SlotView : MonoBehaviour, IPointerClickHandler
         descriptionIcon = Icon;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    private void OnToggleChanged(bool isOn)
     {
-        OnSlotClicked?.Invoke(this);
-    }
+        if (isOn)
+        {
+            Debug.Log("ToggleChanged: " + name);
 
-    public void Highlight()
-    {
-        button.colors = _highlightedColor;
-    }
-
-    public void SetDefaultColor()
-    {
-        button.colors = _defaultColor;
+            OnSlotClicked?.Invoke(this);
+        }
     }
 }

@@ -5,24 +5,36 @@ using UnityEngine.UI;
 
 public class InventoryView : MonoBehaviour
 {
-    [SerializeField] InventoryController inventoryController;
     [SerializeField] GameObject slot;
     [SerializeField] Transform inventoryPanel;
     [SerializeField] TMP_Text descriptionText;
     [SerializeField] Image descriptionIcon;
+    [SerializeField] private List<SlotView> precreatedAddSlots;
 
     private List<SlotView> slotViews = new List<SlotView>();
+    private InventoryController _inventoryController;
 
-    private void Awake()
+    public void Initialize(InventoryController inventoryController)
     {
-        inventoryController.OnItemAdded += UpdateOrCreateSlots;
-        inventoryController.OnItemDeleted += DeleteSlot;
+        _inventoryController = inventoryController;
+        _inventoryController.OnItemAdded += UpdateOrCreateSlots;
+        _inventoryController.OnItemDeleted += DeleteSlot;
+
+        SubscribeSlots();
+    }
+
+    private void SubscribeSlots()
+    {
+        foreach (SlotView slot in precreatedAddSlots)
+        {
+            slot.OnSlotClicked += HandleSlotClicked;
+        }
     }
 
     private void OnDestroy()
     {
-        inventoryController.OnItemAdded -= UpdateOrCreateSlots;
-        inventoryController.OnItemDeleted -= DeleteSlot;
+        _inventoryController.OnItemAdded -= UpdateOrCreateSlots;
+        _inventoryController.OnItemDeleted -= DeleteSlot;
     }
 
     private void DeleteSlot(ItemModel item)
@@ -44,12 +56,12 @@ public class InventoryView : MonoBehaviour
         {
             if (slotView.Item == item)
             {
-                slotView.SetCount(slotView.ItemCount+1);
+                slotView.SetCount(slotView.ItemCount + 1);
                 return;
             }
         }
         CreateSlot(item);
-        
+
     }
 
     private void CreateSlot(ItemModel item)
@@ -60,6 +72,8 @@ public class InventoryView : MonoBehaviour
         slotView.SetItem(item);
         slotView.Render();
 
+        Debug.Log("CreateSlot: " + slotView.name);
+        Debug.Log("Subscribed to: " + slotView.name);
         slotView.OnSlotClicked += HandleSlotClicked;
 
         slotViews.Add(slotView);
@@ -67,9 +81,9 @@ public class InventoryView : MonoBehaviour
 
     private void HandleSlotClicked(SlotView slotView)
     {
-        inventoryController.SelectItem(slotView.Item);
+        Debug.Log("HandleSlotClicked");
+        _inventoryController.SelectItem(slotView.Item);
         ShowDescription(slotView);
-        HighlightSlot(slotView);
     }
 
     private void ShowDescription(SlotView slotView)
@@ -78,21 +92,9 @@ public class InventoryView : MonoBehaviour
         descriptionIcon.sprite = slotView.Item.Icon;
     }
 
-    private void HighlightSlot(SlotView slotView)
+    public void AddSelectedItem()
     {
-        foreach (SlotView slot in slotViews)
-        {
-            if (slot == slotView)
-            {
-                slot.Highlight();
-            }
-
-            else
-            {
-                slot.SetDefaultColor();
-            }
-        }
-        
-    } 
+        _inventoryController.AddSelectedItem();
+    }
 
 }
