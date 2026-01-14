@@ -1,14 +1,20 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class InventoryCompositionRoot : MonoBehaviour // Composit root разобраться с названием
 {
     [SerializeField] private InventoryModel inventoryModel;
     [SerializeField] private InventoryView inventoryView;
+    [SerializeField] private AddSlotGeneralView addSlotGeneralView;
+    [SerializeField] private ButtonAddSlotView buttonAddSlotView;
+    [SerializeField] private ButtonDeleteItemView buttonDeleteItemView;
 
     private void Awake()
     {
         InventoryController inventoryController = new InventoryController(inventoryModel);
+
         inventoryView.Initialize(inventoryController);
+        addSlotGeneralView.Initialize(inventoryController);
+        buttonAddSlotView.Initialize(inventoryController);
+        buttonDeleteItemView.Initialize(inventoryController);
     }
 }
