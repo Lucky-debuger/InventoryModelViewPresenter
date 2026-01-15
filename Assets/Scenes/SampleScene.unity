@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: -885689627, guid: 29c99a34693ada447a07198af68225c7, type: 3}
     - target: {fileID: 3528786049188513860, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3528786049188513860, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
       propertyPath: m_Group
@@ -1550,10 +1550,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1343195869}
   descriptionText: {fileID: 1582213412}
   descriptionIcon: {fileID: 2068343223}
-  precreatedAddSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  toggleGroup: {fileID: 1343195873}
 --- !u!224 &1118009608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1722,6 +1719,7 @@ GameObject:
   - component: {fileID: 1343195872}
   - component: {fileID: 1343195871}
   - component: {fileID: 1343195870}
+  - component: {fileID: 1343195873}
   m_Layer: 0
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -1810,6 +1808,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343195868}
   m_CullTransparentMesh: 1
+--- !u!114 &1343195873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343195868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 0
 --- !u!224 &1555822309 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8193358418915313298, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
@@ -2460,7 +2471,7 @@ PrefabInstance:
       objectReference: {fileID: -386496740, guid: 29c99a34693ada447a07198af68225c7, type: 3}
     - target: {fileID: 3528786049188513860, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3528786049188513860, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
       propertyPath: m_Group
@@ -2557,6 +2568,10 @@ PrefabInstance:
     - target: {fileID: 8839910926563390914, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
       propertyPath: m_Name
       value: Button_AddSword
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022717403687172942, guid: 4b2a279092ab92440ad6d4b726a28a53, type: 3}
+      propertyPath: m_Color.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

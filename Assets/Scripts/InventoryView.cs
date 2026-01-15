@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class InventoryView : MonoBehaviour
 {
-    [SerializeField] GameObject slot;
-    [SerializeField] Transform inventoryPanel;
-    [SerializeField] TMP_Text descriptionText;
-    [SerializeField] Image descriptionIcon;
-    [SerializeField] private List<SlotView> precreatedAddSlots;
+    [SerializeField] private GameObject slot;
+    [SerializeField] private Transform inventoryPanel;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Image descriptionIcon;
+    [SerializeField] private ToggleGroup toggleGroup;
 
     private List<SlotView> slotViews = new List<SlotView>();
     private InventoryController _inventoryController;
@@ -58,8 +58,10 @@ public class InventoryView : MonoBehaviour
     {
         SlotView slotView = Instantiate(slot, inventoryPanel).GetComponent<SlotView>();
 
+        slotView.gameObject.name = $"Slot_{item.Name}";
         slotView.SetupDescriptionPanel(descriptionText, descriptionIcon);
         slotView.SetItem(item);
+        slotView.SetToggleGroup(toggleGroup);
         slotView.Render();
 
         slotView.OnSlotClicked += HandleSlotClicked;

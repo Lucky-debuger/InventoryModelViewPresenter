@@ -18,7 +18,12 @@ public class AddSlotView : MonoBehaviour
     {
         if (isOn)
         {
+            toggle.targetGraphic.color = toggle.colors.selectedColor;
             OnAddSlotViewClicked?.Invoke(itemModel);
+        }
+        else
+        {
+            toggle.targetGraphic.color = toggle.colors.normalColor;
         }
     }
 }

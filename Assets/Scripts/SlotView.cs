@@ -55,11 +55,21 @@ public class SlotView : MonoBehaviour
         descriptionIcon = Icon;
     }
 
+    public void SetToggleGroup(ToggleGroup toggleGroup)
+    {
+        toggle.group = toggleGroup;
+    }
+
     private void OnToggleChanged(bool isOn)
     {
         if (isOn)
         {
+            toggle.targetGraphic.color = toggle.colors.selectedColor;
             OnSlotClicked?.Invoke(this);
+        }
+        else
+        {
+            toggle.targetGraphic.color = toggle.colors.normalColor;
         }
     }
 }

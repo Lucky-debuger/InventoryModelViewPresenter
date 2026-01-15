@@ -12,6 +12,7 @@ public class AddSlotGeneralView : MonoBehaviour
     {
         _inventoryController = inventoryController;
 
+
         SubscribeOnAddSlotView();
     }
 
