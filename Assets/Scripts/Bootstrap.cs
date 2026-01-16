@@ -7,6 +7,7 @@ public class InventoryCompositionRoot : MonoBehaviour // Composit root разо�
     [SerializeField] private AddSlotGeneralView addSlotGeneralView;
     [SerializeField] private ButtonAddSlotView buttonAddSlotView;
     [SerializeField] private ButtonDeleteItemView buttonDeleteItemView;
+    [SerializeField] private DescriptionView descriptionView;
 
     private void Awake()
     {
@@ -16,5 +17,6 @@ public class InventoryCompositionRoot : MonoBehaviour // Composit root разо�
         addSlotGeneralView.Initialize(inventoryController);
         buttonAddSlotView.Initialize(inventoryController);
         buttonDeleteItemView.Initialize(inventoryController);
+        descriptionView.Initialize(inventoryController);
     }
 }

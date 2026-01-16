@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SlotView : MonoBehaviour
@@ -11,18 +10,15 @@ public class SlotView : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text itemCount;
-
     [SerializeField] private TMP_Text itemName;
-    [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Image itemIcon;
-    [SerializeField] private Image descriptionIcon;
     [SerializeField] private Toggle toggle;
 
     public ItemModel Item => item;
 
     public int ItemCount { get; private set; } = 1;
 
-    public event Action<SlotView> OnSlotClicked;
+    public event Action<ItemModel> OnSlotClicked;
 
 
     private void Awake()
@@ -38,8 +34,6 @@ public class SlotView : MonoBehaviour
     {
         itemName.text = item.Name;
         itemIcon.sprite = item.Icon;
-        descriptionText.text = item.Description;
-        descriptionIcon.sprite = item.Icon;
         itemCount.text = ItemCount.ToString();
     }
 
@@ -47,12 +41,6 @@ public class SlotView : MonoBehaviour
     {
         ItemCount = count;
         itemCount.text = ItemCount.ToString();
-    }
-
-    public void SetupDescriptionPanel(TMP_Text description, Image Icon)
-    {
-        descriptionText = description;
-        descriptionIcon = Icon;
     }
 
     public void SetToggleGroup(ToggleGroup toggleGroup)
@@ -65,7 +53,7 @@ public class SlotView : MonoBehaviour
         if (isOn)
         {
             toggle.targetGraphic.color = toggle.colors.selectedColor;
-            OnSlotClicked?.Invoke(this);
+            OnSlotClicked?.Invoke(item);
         }
         else
         {

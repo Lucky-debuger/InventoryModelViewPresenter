@@ -7,8 +7,6 @@ public class InventoryView : MonoBehaviour
 {
     [SerializeField] private GameObject slot;
     [SerializeField] private Transform inventoryPanel;
-    [SerializeField] private TMP_Text descriptionText;
-    [SerializeField] private Image descriptionIcon;
     [SerializeField] private ToggleGroup toggleGroup;
 
     private List<SlotView> slotViews = new List<SlotView>();
@@ -59,7 +57,6 @@ public class InventoryView : MonoBehaviour
         SlotView slotView = Instantiate(slot, inventoryPanel).GetComponent<SlotView>();
 
         slotView.gameObject.name = $"Slot_{item.Name}";
-        slotView.SetupDescriptionPanel(descriptionText, descriptionIcon);
         slotView.SetItem(item);
         slotView.SetToggleGroup(toggleGroup);
         slotView.Render();
@@ -69,17 +66,11 @@ public class InventoryView : MonoBehaviour
         slotViews.Add(slotView);
     }
 
-    private void HandleSlotClicked(SlotView slotView)
+    private void HandleSlotClicked(ItemModel itemModel)
     {
-        _inventoryController.SelectInventorySlot(slotView.Item);
-        ShowDescription(slotView);
+        _inventoryController.SelectInventorySlot(itemModel);
     }
 
-    private void ShowDescription(SlotView slotView)
-    {
-        descriptionText.text = slotView.Item.Description;
-        descriptionIcon.sprite = slotView.Item.Icon;
-    }
 
     public void AddSelectedItem()
     {

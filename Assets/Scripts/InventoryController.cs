@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class InventoryController
 {
@@ -9,10 +8,19 @@ public class InventoryController
 
     public event Action<ItemModel> OnItemAdded;
     public event Action<ItemModel> OnItemDeleted;
+    public event Action<ItemModel> OnSlotSelected;
+    public event Action OnSlotEnded;
+
+
+    public ItemModel GetSelectedSlot()
+    {
+        return _selectedInventoryItem;
+    }
 
     public void SelectInventorySlot(ItemModel item)
     {
         _selectedInventoryItem = item;
+        OnSlotSelected?.Invoke(item);
     }
 
     public void SelectAddSlot(ItemModel item)
@@ -39,5 +47,11 @@ public class InventoryController
 
         _inventoryModel.DeleteItem(_selectedInventoryItem);
         OnItemDeleted?.Invoke(_selectedInventoryItem);
+        _selectedInventoryItem = null;
+
+        if (_selectedInventoryItem == null)
+        {
+            OnSlotEnded?.Invoke();
+        }
     }
 }
