@@ -1,4 +1,4 @@
-# InventorySytemSimpleMVC
+# InventorySytemSimpleMVC Old
 ```mermaid
 classDiagram
 
