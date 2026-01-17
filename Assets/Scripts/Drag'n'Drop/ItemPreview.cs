@@ -4,16 +4,16 @@ using UnityEngine.UI;
 
 public class ItemPreview : MonoBehaviour
 {
-    private ItemPreviewModel _itemPreviewModel;
+    private ItemModel _itemModel;
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text text;
 
 
-    public void Initialize(ItemPreviewModel itemPreviewModel)
+    public void Initialize(ItemModel itemModel)
     {
-        _itemPreviewModel = itemPreviewModel;
+        _itemModel = itemModel;
 
-        image.sprite = _itemPreviewModel.Icon;
-        text.text = _itemPreviewModel.Name;
+        image.sprite = _itemModel.Icon;
+        text.text = _itemModel.Name;
     }
 }

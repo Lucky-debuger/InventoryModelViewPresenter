@@ -12,17 +12,24 @@ public class InventoryCompositionRoot : MonoBehaviour // Composit root разо�
     [SerializeField] private AddItemButton addItemButtonHandAxe;
     [SerializeField] private AddItemButton addItemButtonAstrologersStaff;
 
+    private InventoryController _inventoryController;
+
     private void Awake()
     {
-        InventoryController inventoryController = new InventoryController(inventoryModel);
+        _inventoryController = new InventoryController(inventoryModel);
 
-        inventoryView.Initialize(inventoryController);
-        addSlotGeneralView.Initialize(inventoryController);
-        buttonAddSlotView.Initialize(inventoryController);
-        buttonDeleteItemView.Initialize(inventoryController);
-        descriptionView.Initialize(inventoryController);
-        addItemButtonShortSword.Initialize(inventoryController);
-        addItemButtonAstrologersStaff.Initialize(inventoryController);
-        addItemButtonHandAxe.Initialize(inventoryController);
+        inventoryView.Initialize(_inventoryController);
+        addSlotGeneralView.Initialize(_inventoryController);
+        buttonAddSlotView.Initialize(_inventoryController);
+        buttonDeleteItemView.Initialize(_inventoryController);
+        descriptionView.Initialize(_inventoryController);
+        addItemButtonShortSword.Initialize(_inventoryController);
+        addItemButtonAstrologersStaff.Initialize(_inventoryController);
+        addItemButtonHandAxe.Initialize(_inventoryController);
+    }
+
+    public InventoryController GetInventoryController() // [ ] Убрать?
+    {
+        return _inventoryController;
     }
 }

@@ -17,6 +17,8 @@ public class InventoryController
         return _selectedInventoryItem;
     }
 
+    public ItemModel GetSelectedAddItem() => _selectedAddItem;
+
     public void SelectInventorySlot(ItemModel item)
     {
         _selectedInventoryItem = item;

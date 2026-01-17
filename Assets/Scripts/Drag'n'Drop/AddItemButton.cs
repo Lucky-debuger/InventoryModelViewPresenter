@@ -4,13 +4,11 @@ using UnityEngine.EventSystems;
 
 public class AddItemButton : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private ItemPreviewModel itemPreviewModel;
     [SerializeField] private Canvas parentCanvas;
     [SerializeField] private ItemPreview itemPreviewPrefab;
     [SerializeField] private ItemModel itemModel;
 
     private InventoryController _inventoryController;
-
     private ItemPreview _flyingPreview;
 
     public void Initialize(InventoryController inventoryController)
@@ -21,7 +19,7 @@ public class AddItemButton : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         _flyingPreview = Instantiate(itemPreviewPrefab, parentCanvas.transform);
-        _flyingPreview.Initialize(itemPreviewModel);
+        _flyingPreview.Initialize(itemModel);
         _flyingPreview.transform.SetAsLastSibling();
 
         _inventoryController.SelectAddSlot(itemModel);
