@@ -27,9 +27,4 @@ public class InventoryCompositionRoot : MonoBehaviour // Composit root разо�
         addItemButtonAstrologersStaff.Initialize(_inventoryController);
         addItemButtonHandAxe.Initialize(_inventoryController);
     }
-
-    public InventoryController GetInventoryController() // [ ] Убрать?
-    {
-        return _inventoryController;
-    }
 }

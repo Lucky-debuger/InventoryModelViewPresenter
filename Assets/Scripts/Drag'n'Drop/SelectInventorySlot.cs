@@ -11,16 +11,16 @@ public class SelectInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandle
     private ItemModel _itemModel;
     private InventoryController _inventoryController;
 
-    private void Initialize()
+    public void Construct(InventoryController inventoryController, Canvas canvas, ItemModel itemModel)
     {
-        _itemModel = this.gameObject.GetComponent<SlotView>().Item; // [ ] Плохо ли так делать?
-        _parentCanvas = GameObject.Find("Canvas").GetComponent<Canvas>(); // [ ] Нужно убрать?
-        _inventoryController = GameObject.Find("Inventory").GetComponent<InventoryCompositionRoot>().GetInventoryController(); // [ ] Точно нужно убрать!
+        _inventoryController = inventoryController;
+        _parentCanvas = canvas;
+        _itemModel = itemModel;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Initialize();
+        DragEvents.InvokeInventoryDragStart();
         _inventoryController.SelectInventorySlot(_itemModel);
         _itemPreviewInstance = Instantiate(itemPreviewPrefab, _parentCanvas.transform);
         _itemPreviewInstance.Initialize(_itemModel);
@@ -29,15 +29,20 @@ public class SelectInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void OnDrag(PointerEventData eventData)
     {
         _itemPreviewInstance.transform.position = eventData.position;
+        Debug.Log(IsPointerOverDeleteArea(eventData));
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
+
         if (IsPointerOverDeleteArea(eventData))
         {
             _inventoryController.DeleteItem();
         }
+        
         Destroy(_itemPreviewInstance.gameObject);
+        DragEvents.InvokeInventoryDragEnd();
     }
 
     private bool IsPointerOverDeleteArea(PointerEventData eventData)

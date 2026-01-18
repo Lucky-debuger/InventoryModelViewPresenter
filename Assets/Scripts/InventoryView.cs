@@ -8,6 +8,7 @@ public class InventoryView : MonoBehaviour
     [SerializeField] private GameObject slot;
     [SerializeField] private Transform inventoryPanel;
     [SerializeField] private ToggleGroup toggleGroup;
+    [SerializeField] private Canvas parentCanvas;
 
     private List<SlotView> slotViews = new List<SlotView>();
     private InventoryController _inventoryController;
@@ -56,8 +57,9 @@ public class InventoryView : MonoBehaviour
     {
         SlotView slotView = Instantiate(slot, inventoryPanel).GetComponent<SlotView>();
 
+        slotView.GetComponent<SelectInventorySlot>().Construct(_inventoryController, parentCanvas, item); // [ ] Правильно ли, что мы это тут сделали? 
         slotView.gameObject.name = $"Slot_{item.Name}";
-        slotView.SetItem(item);
+        slotView.SetItem(item); 
         slotView.SetToggleGroup(toggleGroup);
         slotView.Render();
 

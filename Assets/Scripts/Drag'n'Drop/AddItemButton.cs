@@ -28,7 +28,6 @@ public class AddItemButton : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         _flyingPreview.transform.position = eventData.position;
-        Debug.Log(IsPointerOverInventory(eventData));
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -45,8 +44,6 @@ public class AddItemButton : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         var results = new List<RaycastResult>(); // [ ] Почему не могу нормально задать тип?
         EventSystem.current.RaycastAll(eventData, results); // [ ] Точно хороший способ?
-
-        
 
         foreach (var r in results)
         {
